@@ -16,10 +16,20 @@ with TelegramClient(APP_NAME, API_ID, API_HASH) as client:
     
     @client.on(events.NewMessage(pattern='!"*'))
     async def handler(event):
-        cht_id = event.message.peer_id.user_id
+        try:
+            cht_id = event.message.peer_id.user_id
+            
+        except:
+            cht_id = event.message.peer_id.chat_id
+            
         msg = event.message.message.split('!"')[1]
-        
         await event.message.delete()
-        await client.send_message(cht_id, gt.translate(msg, dest='en').text)
+        
+        if msg[0] == '"':
+            msg = msg[1:]
+            await client.send_message(cht_id, gt.translate(msg, dest='la').text)
+            
+        else:
+            await client.send_message(cht_id, gt.translate(msg, dest='en').text)
 
     client.run_until_disconnected()
