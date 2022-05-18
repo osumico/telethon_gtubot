@@ -20,7 +20,12 @@ with TelegramClient(APP_NAME, API_ID, API_HASH) as client:
             cht_id = event.message.peer_id.user_id
             
         except:
-            cht_id = event.message.peer_id.chat_id
+            try:
+                cht_id = event.message.peer_id.chat_id
+                
+            except:
+                cht_id = event.message.peer_id.channel_id
+                
             
         msg = event.message.message.split('!"')[1]
         await event.message.delete()
