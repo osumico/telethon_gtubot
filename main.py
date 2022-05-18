@@ -1,9 +1,9 @@
-from telethon.sync import TelegramClient, events
-from googletrans import Translator
+from telethon.sync import TelegramClient, events # 1.14.0
+from googletrans import Translator # 3.1.0a0
 import json
 import os
 
-with open(f'{os.getcwd()}\\Core\\api.json') as json_file:
+with open(f'{os.getcwd()}\\api.json') as json_file:
     key = json.load(json_file) # You need to replace in the ID/Hash file with your's
     json_file.close()
     
